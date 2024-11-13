@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++ build active file",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${workspaceFolder}/homePage.cpp",
+				"${workspaceFolder}/DatabaseOperations.cpp",
+				"${workspaceFolder}/PatientOperations.cpp",
+				"${workspaceFolder}/AppointmentOperations.cpp",
+				"${workspaceFolder}/DiagnosticOperations.cpp",
+				"-o",
+				"${workspaceFolder}/hospital_management",
+				"-lsqlite3"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Compile all files in the project folder with SQLite"
+		}
+	]
+}
