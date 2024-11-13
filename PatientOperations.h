@@ -10,10 +10,8 @@ class PatientOperations {
 public:
     PatientOperations(DatabaseOperations& dbOps); // Dependency injection of DatabaseOperations
 
-    int addPatient(const string& name, const string& gender, const string& dateOfBirth,
-                   const string& email, const string& phoneNumber);
-    void updatePatient(int id, const string& name, const string& gender, const string& dateOfBirth,
-                       const string& email, const string& phoneNumber);
+    int addPatient(const string& name, const string& gender, const string& dateOfBirth, const string& email, const string& phoneNumber);
+    void updatePatient(int id, const string& name, const string& gender, const string& dateOfBirth, const string& email, const string& phoneNumber);
     void viewPatient(int id);
     void viewAllPatients();
     void deletePatient(int id);
