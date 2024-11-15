@@ -45,7 +45,7 @@ void DiagnosticOperations::viewDiagnostics(int patientID)
 
 void DiagnosticOperations::updateDiagnostic(int diagnosticID, const string& diagnosis) {
     string sql = "UPDATE Diagnosis SET Diagnosis = '" + diagnosis +
-                      "' WHERE DiagnosisID = " + to_string(diagnosticID) + ";";
+                      "' WHERE DiagnosticID = " + to_string(diagnosticID) + ";";
 
     if (dbOps.executeSQL(sql)) {
         cout << "Diagnostic record updated successfully.\n";
