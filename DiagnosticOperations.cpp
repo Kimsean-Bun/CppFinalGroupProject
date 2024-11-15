@@ -5,7 +5,7 @@ using namespace std;
 DiagnosticOperations::DiagnosticOperations(DatabaseOperations& dbOps) : dbOps(dbOps) {}
 
 int DiagnosticOperations::addDiagnostic(int patientID, const string& diagnosisDate, const string& details, const string& diagnosis) {
-    string sql = "INSERT INTO Diagnostic (PatientID, DiagnosisDate, Details, Diagnosis) VALUES (" +
+    string sql = "INSERT INTO Diagnosis (PatientID, DiagnosisDate, Details, Diagnosis) VALUES (" +
                       to_string(patientID) + ", '" + diagnosisDate + "', '" + details + "', '" + diagnosis + "');";
 
     if (dbOps.executeSQL(sql)) {
@@ -21,7 +21,7 @@ int DiagnosticOperations::addDiagnostic(int patientID, const string& diagnosisDa
 
 void DiagnosticOperations::viewDiagnostics(int patientID)
 {
-    string sql = "SELECT * FROM Diagnostic WHERE PatientID = " + to_string(patientID) + ";";
+    string sql = "SELECT * FROM Diagnosis WHERE PatientID = " + to_string(patientID) + ";";
     sqlite3_stmt* stmt;
 
     if (sqlite3_prepare_v2(dbOps.getDatabase(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK) {
@@ -44,8 +44,8 @@ void DiagnosticOperations::viewDiagnostics(int patientID)
 }
 
 void DiagnosticOperations::updateDiagnostic(int diagnosticID, const string& diagnosis) {
-    string sql = "UPDATE Diagnostic SET Diagnosis = '" + diagnosis + 
-                      "' WHERE DiagnosticID = " + to_string(diagnosticID) + ";";
+    string sql = "UPDATE Diagnosis SET Diagnosis = '" + diagnosis +
+                      "' WHERE DiagnosisID = " + to_string(diagnosticID) + ";";
 
     if (dbOps.executeSQL(sql)) {
         cout << "Diagnostic record updated successfully.\n";
