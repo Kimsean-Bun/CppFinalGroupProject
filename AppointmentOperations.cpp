@@ -7,9 +7,10 @@ AppointmentOperations::AppointmentOperations(DatabaseOperations& dbOps) : dbOps(
 void AppointmentOperations::addAppointment(int patientID, const string& date, const string& description) {
     string sql = "INSERT INTO Appointment (PatientID, Date, Description) VALUES (" +
                       to_string(patientID) + ", '" + date + "', '" + description + "');";
-    
+
     if (dbOps.executeSQL(sql)) {
         int lastInsertId = sqlite3_last_insert_rowid(dbOps.getDatabase());
+        cout << endl;
         cout << "Appointment booked successfully." << endl;
         cout << "Appointment ID: " << lastInsertId << endl;
     } else {
@@ -22,6 +23,7 @@ void AppointmentOperations::viewAppointments(int patientID) {
     sqlite3_stmt* stmt;
 
     if (sqlite3_prepare_v2(dbOps.getDatabase(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK) {
+        cout << endl;
         cout << "Appointments for Patient ID " << patientID << ":\n";
         while (sqlite3_step(stmt) == SQLITE_ROW) {
             int appointmentID = sqlite3_column_int(stmt, 0);
@@ -38,7 +40,7 @@ void AppointmentOperations::viewAppointments(int patientID) {
 
 void AppointmentOperations::rescheduleAppointment(int appointmentID, const::string& date){
     string sql ="UPDATE Appointment SET Date =  '" + date + "' WHERE AppointmentID = " + to_string(appointmentID) + ";";
-    
+
     if (dbOps.executeSQL(sql)) {
         cout << "Appointment reschedule successfully.\n";
     } else {
@@ -48,8 +50,9 @@ void AppointmentOperations::rescheduleAppointment(int appointmentID, const::stri
 
 void AppointmentOperations::cancelAppointment(int appointmentID) {
     string sql = "UPDATE Appointment SET Description = 'Cancelled' WHERE AppointmentID = " + to_string(appointmentID) + ";";
-    
+
     if (dbOps.executeSQL(sql)) {
+        cout << endl;
         cout << "Appointment canceled successfully.\n";
     } else {
         cerr << "Failed to cancel the appointment.\n";
