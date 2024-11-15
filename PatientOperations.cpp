@@ -41,7 +41,7 @@ void PatientOperations::viewPatient(int id) {
 
     if (sqlite3_prepare_v2(dbOps.getDatabase(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK) {
         if (sqlite3_step(stmt) == SQLITE_ROW) {
-            cout << "\nID: " << sqlite3_column_int(stmt, 0) << "\n"
+            cout << "ID: " << sqlite3_column_int(stmt, 0) << "\n"
                       << "Name: " << sqlite3_column_text(stmt, 1) << "\n"
                       << "Gender: " << sqlite3_column_text(stmt, 2) << "\n"
                       << "Date of Birth: " << sqlite3_column_text(stmt, 3) << "\n"
