@@ -17,7 +17,7 @@ DatabaseOperations::DatabaseOperations(const string& dbName) {
     } else {
         cout << "Opened database successfully." << endl;
         // Ensure the tables is created
-        createPatientTable(); 
+        createPatientTable();
         createAppointmentTable();
         createDiagnosisTable();
     }

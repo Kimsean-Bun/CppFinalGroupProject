@@ -24,9 +24,11 @@ void viewDiagnostics(DiagnosticOperations& diagOps);
 void updateDiagnostic(DiagnosticOperations& diagOps);
 
 int main() {
+    system("clear");
+
     // Initialize the database connection
     DatabaseOperations dbOps("hospital.db");
-    
+
     // Initialize each operations class with the database connection
     PatientOperations patientOps(dbOps);
     AppointmentOperations apptOps(dbOps);
@@ -34,11 +36,14 @@ int main() {
 
     int choice;
     do {
-        cout << "\nHospital Management System - Main Menu\n";
+        cout << "\n==================================\n";
+        cout << "     Hospital Management System\n";
+        cout << "==================================\n";
         cout << "1. Patient Management\n";
         cout << "2. Appointment Management\n";
         cout << "3. Diagnostic Management\n";
         cout << "4. Exit\n";
+        cout << "----------------------------------\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -67,16 +72,19 @@ int main() {
 void patientMenu(PatientOperations& patientOps) {
     int choice;
     do {
-        cout << "\nPatient Management\n";
+        cout << "\n==================================\n";
+        cout << "        Patient Management\n";
+        cout << "==================================\n";
         cout << "1. Add Patient\n";
-        cout << "2. Update Patients\n";
+        cout << "2. Update Patient\n";
         cout << "3. Delete Patient\n";
         cout << "4. Search Patient\n";
         cout << "5. Display All Patients\n";
-        cout << "6. Return to Main Page\n";
+        cout << "6. Return to Main Menu\n";
+        cout << "----------------------------------\n";
         cout << "Enter your choice: ";
         cin >> choice;
-        cin.ignore(); 
+        cin.ignore();
 
         switch (choice) {
             case 1:
@@ -107,15 +115,18 @@ void patientMenu(PatientOperations& patientOps) {
 void appointmentMenu(AppointmentOperations& apptOps) {
     int choice;
     do {
-        cout << "\nAppointment Management\n";
+        cout << "\n==================================\n";
+        cout << "      Appointment Management\n";
+        cout << "==================================\n";
         cout << "1. Add Appointment\n";
         cout << "2. View Appointments\n";
         cout << "3. Reschedule Appointment\n";
         cout << "4. Cancel Appointment\n";
         cout << "5. Return to Main Menu\n";
+        cout << "----------------------------------\n";
         cout << "Enter your choice: ";
         cin >> choice;
-        cin.ignore(); 
+        cin.ignore();
 
         switch (choice) {
             case 1:
@@ -143,14 +154,17 @@ void appointmentMenu(AppointmentOperations& apptOps) {
 void diagnosticMenu(DiagnosticOperations& diagOps) {
     int choice;
     do {
-        cout << "\nDiagnostic Management\n";
+        cout << "\n==================================\n";
+        cout << "       Diagnostic Management\n";
+        cout << "==================================\n";
         cout << "1. Add Diagnostic\n";
         cout << "2. View Diagnostics\n";
         cout << "3. Update Diagnostic\n";
         cout << "4. Return to Main Menu\n";
+        cout << "----------------------------------\n";
         cout << "Enter your choice: ";
         cin >> choice;
-        cin.ignore(); 
+        cin.ignore();
 
         switch (choice) {
             case 1:
@@ -175,6 +189,7 @@ void diagnosticMenu(DiagnosticOperations& diagOps) {
 void addPatient(PatientOperations& patientOps) {
     string name, gender, dob, email, phone;
 
+    cout << endl;
     cout << "Enter Name: ";
     getline(cin, name);
     // Gender input validation
@@ -199,6 +214,7 @@ void updatePatient(PatientOperations& patientOps) {
     int id;
     string newName, newGender, newDateOfBirth, newEmail, newPhone;
 
+    cout << endl;
     cout << "Enter Patient ID to update: ";
     cin >> id;
     cin.ignore();
@@ -221,9 +237,10 @@ void updatePatient(PatientOperations& patientOps) {
 void deletePatient(PatientOperations& patientOps) {
     int id;
 
+    cout << endl;
     cout << "Enter Patient ID to delete: ";
     cin >> id;
-    cin.ignore(); 
+    cin.ignore();
 
     patientOps.deletePatient(id);
 }
@@ -231,13 +248,16 @@ void deletePatient(PatientOperations& patientOps) {
 void searchPatient(PatientOperations& patientOps){
     int id;
 
+    cout << endl;
     cout << "Enter Patient ID to Search: ";
     cin >> id;
-    cin.ignore(); 
+    cout << endl;
+    cin.ignore();
     patientOps.viewPatient(id);
 }
 
 void displayPatients(PatientOperations& patientOps) {
+    cout << endl;
     patientOps.viewAllPatients();
 }
 
@@ -246,9 +266,10 @@ void addAppointment(AppointmentOperations& apptOps){
     int patientID;
     string date, description;
 
+    cout << endl;
     cout << "Enter Patient ID: ";
     cin >> patientID;
-    cin.ignore(); 
+    cin.ignore();
     cout << "Enter date (YYYY-MM-DD): ";
     getline(cin, date);
     cout << "Enter description: ";
@@ -258,9 +279,10 @@ void addAppointment(AppointmentOperations& apptOps){
 
 void viewAppointments(AppointmentOperations& apptOps){
     int patientID;
+    cout << endl;
     cout << "Enter Patient ID to search: ";
     cin >> patientID;
-    cin.ignore(); 
+    cin.ignore();
 
     apptOps.viewAppointments(patientID);
 }
@@ -269,9 +291,10 @@ void rescheduleAppointment(AppointmentOperations& apptOps){
     int appointmentID;
     string date;
 
+    cout << endl;
     cout << "Enter Appointment ID: ";
     cin >> appointmentID;
-    cin.ignore(); 
+    cin.ignore();
     cout << "Enter the new Date: ";
     getline(cin, date);
     apptOps.rescheduleAppointment(appointmentID, date);
@@ -281,9 +304,10 @@ void cancelAppointment(AppointmentOperations& apptOps) {
     int appointmentID;
     char confirmation;
 
+    cout << endl;
     cout << "Enter Appointment ID to cancel: ";
     cin >> appointmentID;
-    cin.ignore(); 
+    cin.ignore();
     cout << "Enter (Y) to confirm cancelling Appointment ID (" << appointmentID << "): ";
     cin >> confirmation;
     cin.ignore(); // Clear newline character after char input
@@ -300,9 +324,10 @@ void addDiagnostic(DiagnosticOperations& diagOps) {
     int patientID;
     string date, details, diagnosis;
 
+    cout << endl;
     cout << "Enter Patient ID: ";
     cin >> patientID;
-    cin.ignore(); 
+    cin.ignore();
     cout << "Enter Diagnosis Date (YYYY-MM-DD): ";
     getline(cin, date);
     cout << "Enter Details: ";
@@ -316,9 +341,10 @@ void addDiagnostic(DiagnosticOperations& diagOps) {
 void viewDiagnostics(DiagnosticOperations& diagOps) {
     int patientID;
 
+    cout << endl;
     cout << "Enter Patient ID to view diagnostics: ";
     cin >> patientID;
-    cin.ignore(); 
+    cin.ignore();
 
     diagOps.viewDiagnostics(patientID);
 }
@@ -327,9 +353,10 @@ void updateDiagnostic(DiagnosticOperations& diagOps) {
     int diagnosticID;
     string newDiagnosis;
 
+    cout << endl;
     cout << "Enter Diagnostic ID to update: ";
     cin >> diagnosticID;
-    cin.ignore(); 
+    cin.ignore();
     cout << "Enter new Diagnosis: ";
     getline(cin, newDiagnosis);
 

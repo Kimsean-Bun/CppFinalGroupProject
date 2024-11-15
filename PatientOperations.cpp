@@ -4,10 +4,10 @@ using namespace std;
 
 PatientOperations::PatientOperations(DatabaseOperations& dbOps) : dbOps(dbOps) {}
 
-int PatientOperations::addPatient(const string& name, const string& gender, 
-                                  const string& dateOfBirth, const string& email, 
+int PatientOperations::addPatient(const string& name, const string& gender,
+                                  const string& dateOfBirth, const string& email,
                                   const string& phoneNumber) {
-    string sql = "INSERT INTO Patient (Name, Gender, DateOfBirth, Email, PhoneNumber) VALUES ('" + 
+    string sql = "INSERT INTO Patient (Name, Gender, DateOfBirth, Email, PhoneNumber) VALUES ('" +
                       name + "', '" + gender + "', '" + dateOfBirth + "', '" + email + "', '" + phoneNumber + "');";
 
     if (dbOps.executeSQL(sql)) {
@@ -21,13 +21,13 @@ int PatientOperations::addPatient(const string& name, const string& gender,
     }
 }
 
-void PatientOperations::updatePatient(int id, const string& name, const string& gender, 
-                                      const string& dateOfBirth, const string& email, 
+void PatientOperations::updatePatient(int id, const string& name, const string& gender,
+                                      const string& dateOfBirth, const string& email,
                                       const string& phoneNumber) {
     string sql = "UPDATE Patient SET Name = '" + name + "', Gender = '" + gender +
-                      "', DateOfBirth = '" + dateOfBirth + "', Email = '" + email + 
+                      "', DateOfBirth = '" + dateOfBirth + "', Email = '" + email +
                       "', PhoneNumber = '" + phoneNumber + "' WHERE ID = " + to_string(id) + ";";
-    
+
     if (dbOps.executeSQL(sql)) {
         cout << "Patient updated successfully.\n";
     } else {
@@ -46,7 +46,7 @@ void PatientOperations::viewPatient(int id) {
                       << "Gender: " << sqlite3_column_text(stmt, 2) << "\n"
                       << "Date of Birth: " << sqlite3_column_text(stmt, 3) << "\n"
                       << "Email: " << sqlite3_column_text(stmt, 4) << "\n"
-                      << "PhoneNumber: " << sqlite3_column_text(stmt, 5) << "\n";
+                      << "Phone Number: " << sqlite3_column_text(stmt, 5) << "\n";
         } else {
             cout << "No patient found with ID " << id << ".\n";
         }
@@ -63,7 +63,7 @@ void PatientOperations::viewAllPatients(){
 
 void PatientOperations::deletePatient(int id) {
     string sql = "DELETE FROM Patient WHERE ID = " + to_string(id) + ";";
-    
+
     if (dbOps.executeSQL(sql)) {
         cout << "Patient deleted successfully.\n";
     } else {

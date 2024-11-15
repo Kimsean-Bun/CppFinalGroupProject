@@ -10,7 +10,8 @@ int DiagnosticOperations::addDiagnostic(int patientID, const string& diagnosisDa
 
     if (dbOps.executeSQL(sql)) {
         int lastInsertId = sqlite3_last_insert_rowid(dbOps.getDatabase());
-        cout << "Diagnostic record added Successfully." << endl;
+        cout << endl;
+        cout << "Diagnostic record added successfully." << endl;
         cout << "Diagnostic ID: " << lastInsertId << endl;
         return lastInsertId;
     } else {
@@ -25,6 +26,7 @@ void DiagnosticOperations::viewDiagnostics(int patientID)
     sqlite3_stmt* stmt;
 
     if (sqlite3_prepare_v2(dbOps.getDatabase(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK) {
+        cout << endl;
         cout << "Diagnostics for Patient ID " << patientID << ":\n";
         while (sqlite3_step(stmt) == SQLITE_ROW) {
             int diagnosticID = sqlite3_column_int(stmt, 0);
