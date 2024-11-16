@@ -28,6 +28,7 @@ void DiagnosticOperations::viewDiagnostics(int patientID)
     if (sqlite3_prepare_v2(dbOps.getDatabase(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK) {
         cout << endl;
         cout << "Diagnostics for Patient ID " << patientID << ":\n";
+        cout << endl;
         while (sqlite3_step(stmt) == SQLITE_ROW) {
             int diagnosticID = sqlite3_column_int(stmt, 0);
             const unsigned char* date = sqlite3_column_text(stmt, 2);
