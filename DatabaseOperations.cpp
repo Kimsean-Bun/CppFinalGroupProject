@@ -63,34 +63,34 @@ sqlite3* DatabaseOperations::getDatabase() {
     return db;
 }
 
-void DatabaseOperations::createAppointmentTable(){
+void DatabaseOperations::createPatientTable(){
     string sql = "CREATE TABLE IF NOT EXISTS Patient ("
                  "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                 "Name TEXT NOT NULL, "
-                 "Gender TEXT CHECK(Gender IN ('M', 'F', 'NA')), "
-                 "DateOfBirth DATE, "
+                 "Name TEXT NOT NULL CHECK( Name != ''), "
+                 "Gender TEXT CHECK(Gender IN ('M', 'F', 'NA')) NOT NULL, "
+                 "DateOfBirth TEXT NOT NULL CHECK( DateOfBirth != ''), "
                  "Email TEXT, "
-                 "PhoneNumber TEXT);";
+                 "PhoneNumber TEXT) STRICT;";
     executeSQL(sql);
 }
 
-void DatabaseOperations::createPatientTable(){
+void DatabaseOperations::createAppointmentTable(){
     string sql = "CREATE TABLE IF NOT EXISTS Appointment ("
                  "AppointmentID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                 "PatientID INTEGER, "
-                 "Date TEXT, "
+                 "PatientID INTEGER NOT NULL CHECK( PatientID != ''), "
+                 "Date TEXT NOT NULL CHECK( Date != ''), "
                  "Description TEXT, "
-                 "FOREIGN KEY (PatientID) REFERENCES Patient(ID));";
+                 "FOREIGN KEY (PatientID) REFERENCES Patient(ID)) STRICT;";
     executeSQL(sql);
 }
 
 void DatabaseOperations::createDiagnosisTable(){
     string sql = "CREATE TABLE IF NOT EXISTS Diagnosis ("
         "DiagnosticID INTEGER PRIMARY KEY AUTOINCREMENT, "
-        "PatientID INTEGER, "
-        "DiagnosisDate DATE NOT NULL, "
-        "Details TEXT, "
+        "PatientID INTEGER NOT NULL CHECK( PatientID != ''), "
+        "DiagnosisDate TEXT NOT NULL CHECK( DiagnosisDate != ''), "
+        "Details TEXT NOT NULL CHECK( Details != ''), "
         "Diagnosis TEXT,"
-        "FOREIGN KEY(PatientID) REFERENCES Patient(ID)); ";
+        "FOREIGN KEY(PatientID) REFERENCES Patient(ID)) STRICT; ";
     executeSQL(sql);
 }
